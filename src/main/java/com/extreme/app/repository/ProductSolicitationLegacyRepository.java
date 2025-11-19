@@ -5,7 +5,7 @@ import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
-public class ItemSolicitationLegacyRepository implements PanacheRepository<ProductSolicitationLegacyEntity> {
+public class ProductSolicitationLegacyRepository implements PanacheRepository<ProductSolicitationLegacyEntity> {
 
     public Long findMaxMigratedId() {
         return find("select max(i.migratedId) from ProductSolicitationLegacyEntity i")

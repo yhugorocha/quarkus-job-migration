@@ -6,7 +6,7 @@ public interface MigrationService {
     void migratedRepresentative() throws Exception;
     void migratedAssistedDocuments() throws Exception;
     void migratedSolicitation() throws Exception;
-    void migratedItemsSolicitation() throws Exception;
+    void migratedProductsSolicitation() throws Exception;
     void migratedForwarding() throws Exception;
     void migratedOficio() throws Exception;
     void migratedReport() throws Exception;

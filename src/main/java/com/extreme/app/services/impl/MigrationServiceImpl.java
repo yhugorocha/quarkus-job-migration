@@ -26,7 +26,7 @@ public class MigrationServiceImpl implements MigrationService {
     private final StorageService storageService;
     private final AssistedAttachmentRepository assistedAttachmentRepository;
     private final SolicitationLegacyRepository solicitationLegacyRepository;
-    private final ItemSolicitationLegacyRepository itemSolicitationLegacyRepository;
+    private final ProductSolicitationLegacyRepository productSolicitationLegacyRepository;
     private final ForwardingLegacyRepository forwardingLegacyRepository;
     private final OficioLegacyRepository oficioLegacyRepository;
     private final ReportLegacyRepository reportLegacyRepository;
@@ -265,23 +265,23 @@ public class MigrationServiceImpl implements MigrationService {
     }
 
     @Override
-    public void migratedItemsSolicitation() throws Exception {
+    public void migratedProductsSolicitation() throws Exception {
         long start = System.currentTimeMillis();
         int sucess = 0;
         int erros = 0;
-        var itemList = legacyRepository.findItemSolicitationByLegacy(itemSolicitationLegacyRepository.findMaxMigratedId());
+        var productList = legacyRepository.findProductSolicitationByLegacy(productSolicitationLegacyRepository.findMaxMigratedId());
         var erroList = new ArrayList<String>();
 
-        int total = itemList.size();
+        int total = productList.size();
 
-        for (ProductSolicitationLegacyEntity item : itemList) {
+        for (ProductSolicitationLegacyEntity product : productList) {
             try {
-                this.saveMigratedItemSolicitation(item);
+                this.saveMigratedProductSolicitation(product);
                 sucess++;
             } catch (Exception e) {
                 erros++;
-                erroList.add("Erro ao migrar Item Solicitação: " + item.getMigratedId() + ": " + e.getMessage());
-                log.error("Erro ao migrar Solicitação: " + item.getMigratedId() + ": " + e.getMessage());
+                erroList.add("Erro ao migrar Item Solicitação: " + product.getMigratedId() + ": " + e.getMessage());
+                log.error("Erro ao migrar Solicitação: " + product.getMigratedId() + ": " + e.getMessage());
             }
         }
 
@@ -301,8 +301,8 @@ public class MigrationServiceImpl implements MigrationService {
     }
 
     @Transactional(Transactional.TxType.REQUIRES_NEW)
-    public void saveMigratedItemSolicitation(ProductSolicitationLegacyEntity item){
-        itemSolicitationLegacyRepository.getEntityManager().merge(item);
+    public void saveMigratedProductSolicitation(ProductSolicitationLegacyEntity product){
+        productSolicitationLegacyRepository.getEntityManager().merge(product);
     }
 
     @Override

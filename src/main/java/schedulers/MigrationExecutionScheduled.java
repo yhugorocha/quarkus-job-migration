@@ -13,8 +13,8 @@ public class MigrationExecutionScheduled {
 
     @Scheduled(every = "30m")
     public void migratedAssisted() throws Exception {
-        log.info("Iniciando a migração de assistidos...");
-        migrationService.migratedAssisted();
+        //log.info("Iniciando a migração de assistidos...");
+        //migrationService.migratedAssisted();
     }
 
     @Scheduled(every = "60m")
@@ -23,19 +23,19 @@ public class MigrationExecutionScheduled {
         //migrationService.migratedAssistedDocuments();
     }
 
-    @Scheduled(every = "20m")
+    @Scheduled(every = "10m")
     public void migratedItemSolicitation() throws Exception {
-        //log.info("Iniciando a migração de itens da solicitação...");
-        //migrationService.migratedItemsSolicitation();
+        //log.info("Iniciando a migração dos produtos da solicitação...");
+        //migrationService.migratedProductsSolicitation();
     }
 
-    @Scheduled(every = "20m")
+    @Scheduled(every = "10m")
     public void migratedForwarding() throws Exception {
         //log.info("Iniciando a migração de Encaminhamentos...");
         //migrationService.migratedForwarding();
     }
 
-    @Scheduled(every = "20m")
+    @Scheduled(every = "10m")
     public void migratedOficio() throws Exception {
         //log.info("Iniciando a migração de Oficios...");
         //migrationService.migratedOficio();
@@ -47,28 +47,27 @@ public class MigrationExecutionScheduled {
         //migrationService.migratedReport();
     }
 
-    @Scheduled(every = "30m")
+    @Scheduled(every = "10m")
     public void migratedStatusDocumentSolicitation() throws Exception {
-        log.info("Iniciando a migração dos status dos documentos da solicitação...");
-        migrationService.migratedStatusDocumentSolicitation();
+        //log.info("Iniciando a migração dos status dos documentos da solicitação...");
+        //migrationService.migratedStatusDocumentSolicitation();
     }
 
-    @Scheduled(every = "30m")
+    @Scheduled(every = "10m")
     public void migratedMedicalDocument() throws Exception {
         //log.info("Iniciando a migração dos documentos Medicos...");
         //migrationService.migratedMedicalDocument();
     }
 
-    @Scheduled(every = "30m")
+    @Scheduled(every = "10m")
     public void migratedProductToMedicalDocument() throws Exception {
         //log.info("Iniciando a migração dos produtos ligados aos documentos medicos...");
         //migrationService.migratedProductToMedicalDocument();
     }
 
-    @Scheduled(every = "30m")
+    @Scheduled(every = "10m")
     public void migratedCidToMedicalDocument() throws Exception {
         //log.info("Iniciando a migração dos cids ligados aos documentos medicos...");
         //migrationService.migratedCidToMedicalDocument();
     }
-
 }

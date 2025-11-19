@@ -301,7 +301,7 @@ public class LegacyRepository {
     }
 
     @Transactional(Transactional.TxType.NOT_SUPPORTED)
-    public List<ProductSolicitationLegacyEntity> findItemSolicitationByLegacy(Long id) throws SQLException {
+    public List<ProductSolicitationLegacyEntity> findProductSolicitationByLegacy(Long id) throws SQLException {
         long baseId = (id == null ? 0 : id);
         long maxId = baseId + 50_000;
         var itemList = new ArrayList<ProductSolicitationLegacyEntity>();
@@ -336,20 +336,21 @@ public class LegacyRepository {
 
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    var itemSolicitation = new ProductSolicitationLegacyEntity();
+                    var productSolicitation = new ProductSolicitationLegacyEntity();
 
-                    itemSolicitation.setMigratedId(rs.getLong("migrated_id"));
-                    itemSolicitation.setSolicitation(rs.getLong("solicitation_id"));
-                    itemSolicitation.setQuantity(rs.getInt("quantity"));
-                    itemSolicitation.setProductCode(rs.getString("product_code"));
-                    itemSolicitation.setProductName(rs.getString("product_name"));
-                    itemSolicitation.setClassification(rs.getString("classification"));
-                    itemSolicitation.setQuantityForwarding(rs.getInt("quantity_forwarding"));
-                    itemSolicitation.setPosology(rs.getString("posology"));
-                    itemSolicitation.setStatus(rs.getString("status"));
-                    itemSolicitation.setTechnicalAnalysis(rs.getString("technical_analysis"));
+                    productSolicitation.setMigratedId(rs.getLong("migrated_id"));
+                    productSolicitation.setSolicitation(rs.getLong("solicitation_id"));
+                    productSolicitation.setQuantity(rs.getInt("quantity"));
+                    productSolicitation.setProductCode(rs.getString("product_code"));
+                    productSolicitation.setProductName(rs.getString("product_name"));
+                    productSolicitation.setClassification(rs.getString("classification"));
+                    productSolicitation.setQuantityForwarding(rs.getInt("quantity_forwarding"));
+                    productSolicitation.setPosology(rs.getString("posology"));
+                    productSolicitation.setStatus(rs.getString("status"));
+                    productSolicitation.setTechnicalAnalysis(rs.getString("technical_analysis"));
+                    productSolicitation.setReportId(rs.getLong("report_id"));
 
-                    itemList.add(itemSolicitation);
+                    itemList.add(productSolicitation);
                 }
             }
         }
@@ -506,7 +507,7 @@ public class LegacyRepository {
 
     public List<StatusDocumentSolicitationLegacyEntity> findStatusDocumentSolicitationByLegacy(Long id) throws SQLException {
         long baseId = (id == null ? 0 : id);
-        long maxId = baseId + 120_000;
+        long maxId = baseId + 50_000;
         var statusList = new ArrayList<StatusDocumentSolicitationLegacyEntity>();
 
         var sb = """
