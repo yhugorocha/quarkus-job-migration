@@ -20,9 +20,7 @@ public class AssistedRepository implements PanacheRepository<AssistedEntity> {
                 .list();
     }
 
-    public Long findMaxMigratedId() {
-        return find("select max(a.migratedId) from AssistedEntity a")
-                .project(Long.class)
-                .firstResult();
+    public Optional<AssistedEntity> findByCpf(String cpf){
+        return find("cpf", cpf).firstResultOptional();
     }
 }

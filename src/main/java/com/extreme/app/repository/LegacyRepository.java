@@ -26,6 +26,7 @@ public class LegacyRepository {
         var assisteds = new ArrayList<AssistedEntity>();
 
         StringBuilder sb = new StringBuilder();
+
         sb.append("WITH base AS (");
         sb.append("    SELECT ");
         sb.append("        p.id, ");
@@ -139,6 +140,7 @@ public class LegacyRepository {
         sql.append("        p.Nome, ");
         sql.append("        p.NomeSocial, ");
         sql.append("        REPLACE(REPLACE(REPLACE(REPLACE(p.cpf, '.', ''), '-', ''), '/', ''), ' ', '') AS cpf, ");
+        sql.append("        REPLACE(REPLACE(REPLACE(REPLACE(p.Rg, '.', ''), '-', ''), '/', ''), ' ', '') AS Rg, ");
         sql.append("        REPLACE(REPLACE(p.Cep, '-', ''), '.', '') AS Cep, ");
         sql.append("        p.Logradouro, ");
         sql.append("        p.Numero, ");
@@ -171,12 +173,16 @@ public class LegacyRepository {
                     var representative = new RepresentativeEntity();
                     var address = new AddressEntity();
                     var contact = new ContactEntity();
+                    var identityCard = new IdentityCardEntity();
 
                     representative.setMigratedId(rs.getLong("id"));
                     representative.setAssistedId(rs.getLong("solicitante_id"));
                     representative.setName(rs.getString("Nome"));
                     representative.setSocialName(rs.getString("NomeSocial"));
                     representative.setCpf(rs.getString("cpf"));
+                    representative.setDateCreated(LocalDateTime.now());
+                    representative.setIsDeleted(false);
+
                     address.setPostalCode(rs.getString("Cep"));
                     address.setStreet(rs.getString("Logradouro"));
                     address.setNumber(rs.getString("Numero"));
@@ -187,10 +193,13 @@ public class LegacyRepository {
 
                     contact.setHomePhone(rs.getString("Telefone"));
                     contact.setMobilePhone(rs.getString("Celular"));
+
+                    identityCard.setNumber(rs.getString("Rg"));
+
                     representative.setAddress(address);
                     representative.setContact(contact);
-                    representative.setDateCreated(LocalDateTime.now());
-                    representative.setIsDeleted(false);
+                    representative.setIdentityCard(identityCard);
+
                     representativeList.add(representative);
 
                 }

@@ -45,7 +45,7 @@ public class MigrationServiceImpl implements MigrationService {
 
         int total = assistedList.size();
 
-        if(countAssisted < 10000 && !assistedList.isEmpty()) {
+        if(!assistedList.isEmpty()) {
             for (AssistedEntity assisted : assistedList) {
                 try {
                     this.saveMigratedAssisted(assisted);
@@ -88,7 +88,7 @@ public class MigrationServiceImpl implements MigrationService {
         var countRepresentatives = representativeRepository.count();
         int total = representativeList.size();
 
-        if(countRepresentatives < 10000 && !representativeList.isEmpty()){
+        if(!representativeList.isEmpty()){
             for (RepresentativeEntity representative : representativeList) {
                 try {
                     this.processSingleRepresentative(representative);

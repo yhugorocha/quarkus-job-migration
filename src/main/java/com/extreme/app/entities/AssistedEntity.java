@@ -23,8 +23,11 @@ public class AssistedEntity {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "migrated_id", unique = true)
+    @Column(name = "migrated_id")
     private Long migratedId;
+
+    @Column(name = "migrated_interior_id")
+    private Long migratedInteriorId;
 
     @Column(name = "name")
     private String name;
